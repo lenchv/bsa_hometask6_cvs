@@ -10,4 +10,3 @@ echo $oPage->body([
     'time' => \Library\OtherClass::timeNow()
   ]);
 echo $oPage->footer();
-
