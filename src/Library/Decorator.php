@@ -23,8 +23,9 @@ class Decorator {
   public function body($param) {
     $this->body = "<body>" .
       "<h1>Current date and time</h1>" .
-      "<p>{$param['date]}<br />{$param['time']}</p>" .
+      "<p>{$param['date']}<br />{$param['time']}</p>" .
       "</body>";
+    return $this;
   }
 
   public function build() {
