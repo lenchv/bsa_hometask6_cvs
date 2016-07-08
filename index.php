@@ -8,4 +8,4 @@ echo (new \Library\Decorator())->header("BSA Hometaks")
       "date" => \Library\MyClass::dateNow(),
       "time" => \Library\OtherClass::timeNow()
     ])
-  ->footer();
+  ->footer()->build();
