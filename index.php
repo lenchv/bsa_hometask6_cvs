@@ -1,8 +1,4 @@
 <?php
-class MyClass {
-  public static function dateNow() {
-    return date("d.m.Y", time());
-  }
-}
+require_once(__DIR__ . "/src/Library/MyClass.php");
 
-echo MyClass::dateNow() . PHP_EOL;
+echo \Library\MyClass::dateNow() . PHP_EOL;
