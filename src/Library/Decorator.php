@@ -2,33 +2,49 @@
 namespace Library;
 
 class Decorator {
-  private $header;
-  private $footer;
-  private $body;
+  private $data;
 
-  public function header($title) {
-    $this->header = "<!DOCTYPE html>" .
+  public function __construct($type, $data = "") {
+    switch ($type) {
+      case 'header':
+        $this->header($data);
+        break;
+      case 'footer':
+        $this->footer();
+        break;
+      case 'body':
+        $this->body($data);
+        break;
+      default:
+        $this->setData($data);
+        break;
+    }
+  }
+
+  private function header($title) {
+    $this->data = "<!DOCTYPE html>" .
       "<html>" .
       "<head>" .
       "<title>{$title}</title>" .
       "</head>";
-    return $this;
   }
 
-  public function footer() {
-    $this->footer = "</html>";
-    return $this;
+  private function footer() {
+    $this->data = "</html>";
   }
 
-  public function body($param) {
-    $this->body = "<body>" .
+  private function body($param) {
+    $this->data = "<body>" .
       "<h1>Current date and time</h1>" .
       "<p>{$param['date']}<br />{$param['time']}</p>" .
       "</body>";
-    return $this;
   }
 
-  public function build() {
-    return $this->header . $this->body . $this->footer;
+  private function setData($data) {
+    $this->data = $data;
+  }
+
+  public function getData() {
+    return $this->data;
   }
 }
