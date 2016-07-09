@@ -2,22 +2,33 @@
 namespace Library;
 
 class Decorator {
+  private $header;
+  private $footer;
+  private $body;
+
   public function header($title) {
-    return "<!DOCTYPE html>" .
+    $this->header = "<!DOCTYPE html>" .
       "<html>" .
       "<head>" .
       "<title>{$title}</title>" .
       "</head>";
+    return $this;
   }
 
   public function footer() {
-    return "</html>";
+    $this->footer = "</html>";
+    return $this;
   }
 
   public function body($param) {
-    return "<body>" .
+    $this->body = "<body>" .
       "<h1>Current date and time</h1>" .
       "<p>{$param['date']}<br />{$param['time']}</p>" .
       "</body>";
+    return $this;
+  }
+
+  public function build() {
+    return $this->header . $this->body . $this->footer;
   }
 }
