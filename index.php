@@ -3,7 +3,7 @@ require_once(__DIR__ . "/src/Library/MyClass.php");
 require_once(__DIR__ . "/src/Library/OtherClass.php");
 require_once(__DIR__ . "/src/Library/Decorator.php");
 require_once(__DIR__ . "/src/Library/Builder.php");
-// change for branch develop
+// change that no in develop and master branches
 use \Library\{MyClass, OtherClass, Decorator, Builder};
 $header = new Decorator("header", "BSA Hometask");
 $body = new Decorator("body", [
