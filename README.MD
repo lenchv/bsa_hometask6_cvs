@@ -1,13 +1,11 @@
 #Домашнее задание к лекции BSA-16 Version Control Systems: Git
-1. <b>Работа с историей изменений<b>. 
+1. <b>Работа с историей изменений</b>. 
 Написать команды:
 <p>
 1) которая выводит сообщения и автора всех коммитов из ветки develop-feature1, которые сделаны за последние 3 часа и которых нет в родительских ветках (develop, master). Сортировка по дате, первые более новые.
 <i><b>Решение:</b></i><br />
-<code>
-git checkout develop-feature1<br />
-git log --pretty=format:"%an %s" --since=3.hours develop-feature1 --not master develop --date-order
-</code>
+<code>git checkout develop-feature1</code><br />
+<code>git log --pretty=format:"%an %s" --since=3.hours develop-feature1 --not master develop --date-order</code>
 <blockquote>Переключаемся на ветвь develop-feature1. Выводит коммиты в формате %имя автора% %сообщение%, сделанные за последние 3 часа из ветви develop-feature1, которых нет в ветвях master и develop, отсортированные по дате по убыванию.</blockquote>
 </p>
 <p>
@@ -17,18 +15,18 @@ git log --pretty=format:"%an %s" --since=3.hours develop-feature1 --not master d
 <blockquote>Выводит список коммитов из ветвей develop и master в формате "%сообщение% : %имя автора% %дата автора%", в тексте которых есть номер 5</blockquote>
 </p>
 <br />
-2. <b><q>Работа с историей изменений</q><b>. 
+2. <b><q>Работа с историей изменений</q></b>. 
 <p>
 <u>Дано</u>: После слияния ветки develop-feature1 в develop, вы продолжили работать в ветке develop-feature1, а develop отдали на тестирование, потом исправили ошибку и закоммитили исправление в develop-feature1, сделали push. Через какое-то время тим лид говорит, что это критический фикс, и надо включить его в develop. Вы делаете pull в ветке develop-feature1 и оказывается, что ваш коллега сделал еще 3 коммита после вашего, и они не стабильные, поэтому не должны быть включены в develop.<br />
 <u>Задание</u>: как добавить в develop только ваш коммит, но чтобы 3 коммита после него в develop не попали?
 <br />
 <i><b>Решение:</b></i><br />
-<span>Необходимо в ветке develop-feature1 откатиться на стабильный commit и после этого слить в ветку develop.</span>
+<span>Необходимо в ветке develop-feature1 откатиться на стабильный commit и после этого слить в ветку develop.</span><br />
 <code>git checkout develop-feature1</code>
 <blockquote>Переключаемся на вектку develop-feature1</blockquote>
-<code>git reset <i><HASH_STABLE_COMMIT></i></code>
-<blockquote>Откатываемся на коммит с хешем <i><HASH_STABLE_COMMIT></i></blockquote>
-<code>git checkout <CHANGED_FILES></code>
+<code>git reset <i>&lt;HASH_STABLE_COMMIT&gt;</i></code>
+<blockquote>Откатываемся на коммит с хешем <i>&lt;HASH_STABLE_COMMIT&gt;</i></blockquote>
+<code>git checkout &lt;CHANGED_FILES&gt;</code>
 <blockquote>Подтверждаем изменения файлов <CHANGED_FILES></blockquote>
 <code>git checkout develop</code>
 <blockquote>Переключаемся на ветку develop</blockquote>
@@ -42,6 +40,6 @@ git log --pretty=format:"%an %s" --since=3.hours develop-feature1 --not master d
 <u>Задание</u>: Предложите вариант, как наиболее просто исправить ситуацию, чтобы тим лид не увидел ваш промах.<br />
 <i><b>Решение:</b></i><br />
 <span>Если необходимо испроавить только последний коммит, то достаточно выполнить git commit --amend, а если несколько, то необходимо выполнить следующее:</span>
-<code>git rebase -i HEAD~<N></code>
+<code>git rebase -i HEAD~&lt;N&gt;</code>
 <blockquote>где N - кол-во коммитов на которые необходимо вернуться назад. После этой комманды откроются на редактирование коммиты в обратном порядке, необходимо написать перед изменяемыми коммитами <code>edit</code>, а на остальных оставить <code>pick</code>. После чего курсор откатиться на кол-во коммитов назад, и необходимо будет выполнить <code>git commit --amend</code> для изменения сообщения и <code>git rebase --continue</code> для каждого commit'a помеченного, как <code>edit</code></blockquote>
 </p>
